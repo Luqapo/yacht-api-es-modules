@@ -1,7 +1,7 @@
 import Router from 'koa-router';
 import { silentImport } from '../utils/import.js';
 
-const service = await silentImport('/service/index.js', '');
+const service = await silentImport('/service/index.js');
 
 const router = new Router({ prefix: '/harbor' });
 

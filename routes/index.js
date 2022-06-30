@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { fileURLToPath } from 'url';
+import { fileURLToPath, pathToFileURL } from 'url';
 import path from 'path';
 import combineRouters from 'koa-combine-routers';
 import { silentImport } from '../utils/import.js';
@@ -14,7 +14,9 @@ async function addRouter(file) {
 
 async function create() {
   const promises = [];
-  const currentDir = '/routes/';
+  const currentPathSplitted = pathToFileURL(import.meta.url).pathname.split('/');
+  const currentDir = `/${currentPathSplitted[currentPathSplitted.length - 2]}/`;
+
   fs
     .readdirSync(`${path.resolve()}${currentDir}`)
     .filter((file) => (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js'))

@@ -27,13 +27,11 @@ class BaseModel {
   }
 
   buildWhere(where) {
-    console.log('🚀 ~ file: baseModel.js ~ line 30 ~ BaseModel ~ buildWhere ~ where', where);
     if(!where) return '';
     const filters = [];
     Object.keys(where).forEach((v) => {
       if([...this.fields, ...this.filters.map((f) => f.name)].indexOf(v) > -1) {
         const isFilter = this.filters.find((f) => f.name === v);
-        console.log('🚀 ~ file: baseModel.js ~ line 35 ~ BaseModel ~ Object.keys ~ isFilter', isFilter);
         if(isFilter && isFilter.type === 'string' && isFilter.filter === 'ILIKE') {
           filters.push(`${isFilter.field} ${isFilter.filter} '%${where[v]}%'`);
         } else if(isFilter && isFilter.filter === '@>') {
@@ -52,7 +50,6 @@ class BaseModel {
   }
 
   getWhere(where) {
-    console.log('🚀 ~ file: baseModel.js ~ line 53 ~ BaseModel ~ getWhere ~ where', where);
     if(where) {
       const whereObject = where.split(',').reduce((acc, e) => {
         const [key, value] = e.split(';');
@@ -65,7 +62,6 @@ class BaseModel {
   }
 
   validateFields(fields) {
-    console.log('🚀 ~ file: baseModel.js ~ line 68 ~ BaseModel ~ validateFields ~ fields', fields);
     fields.split(',').forEach((f) => {
       if(this.fields.indexOf(f) < 0) {
         throw new Error('Invalid filed');
@@ -74,7 +70,6 @@ class BaseModel {
   }
 
   getFields(fields) {
-    console.log('🚀 ~ file: baseModel.js ~ line 76 ~ BaseModel ~ getFields ~ fields', fields);
     if(this.view_fields) {
       return this.view_fields.join(',');
     }

@@ -6,9 +6,7 @@ export class Region extends BaseModel {
     super();
     this.schema = 'catalog';
     this.table = 'harbor';
-    // this.view = 'view_region';
     this.fields = ['id', 'name', 'long', 'lat', 'geom'];
-    // this.view_fields = ['id', 'name', 'created_at', 'geom', 'routes'];
   }
 
   create(data) {
