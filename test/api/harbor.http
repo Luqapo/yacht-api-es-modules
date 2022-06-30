@@ -1,0 +1,18 @@
+@serverAdress = http://localhost:3000
+
+POST {{serverAdress}}/harbor/
+content-type: application/json
+
+{
+  "name": "Mikołajki",
+  "long": "53.799967",
+  "lat": "21.5711281"
+}
+
+###
+
+GET http://localhost:3000/harbor
+
+###
+
+GET http://localhost:3000/

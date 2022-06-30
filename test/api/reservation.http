@@ -1,0 +1,36 @@
+@serverAdress = http://localhost:3000
+
+POST {{serverAdress}}/reservation/
+content-type: application/json
+
+{
+  "yacht_id": 1,
+  "user_id": 1,
+  "start_harbor_id": 1,
+  "end_harbor_id": 1,
+  "date_from": "2022-07-01",
+  "date_to": "2022-07-14-",
+  "dupa": "fsdaf"
+}
+
+###
+
+POST {{serverAdress}}/reservation/
+content-type: application/json
+
+{
+  "yacht_id": 1,
+  "user_id": 1,
+  "start_harbor_id": 1,
+  "end_harbor_id": 1,
+  "date_from": "2022-08-01",
+  "date_to": "2022-08-14"
+}
+
+###
+
+GET http://localhost:3000/reservation
+
+###
+
+GET http://localhost:3000/

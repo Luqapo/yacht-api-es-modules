@@ -1,0 +1,74 @@
+@serverAdress = http://localhost:3000
+# @serverAdress = https://api.yacht-rent.pl
+
+// create user
+
+POST {{serverAdress}}/user/
+content-type: application/json
+
+{
+  "name": "Lucjan",
+  "email": "test@test.com",
+  "password": "innyswiat6.3"
+}
+
+###
+// confirm user
+
+GET {{serverAdress}}/user/confirm?token=f66e06c6a9ea&email=test@test.com
+content-type: application/json
+
+
+###
+// recover password
+
+POST {{serverAdress}}/user/recover
+content-type: application/json
+
+{
+  "email": "test@test.com"
+}
+
+###
+// login
+
+POST {{serverAdress}}/user/login
+content-type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "e1b2b50f9bd2"
+}
+
+###
+// login wrong pass 401
+
+POST {{serverAdress}}/user/login
+content-type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "b50f9bd2"
+}
+
+###
+// login wrong eemail 404
+
+POST {{serverAdress}}/user/login
+content-type: application/json
+
+{
+  "email": "luqpo@gmail.com",
+  "password": "b50f9bd2"
+}
+
+###
+// logout
+
+POST {{serverAdress}}/user/logout
+content-type: application/json
+Authorization: b 9c3690331ee35e43679fc5f248e8f3e5
+
+{
+  "email": "test@test.com"
+}

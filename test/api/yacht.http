@@ -1,0 +1,18 @@
+@serverAdress = http://localhost:3000
+
+POST {{serverAdress}}/yacht/
+content-type: application/json
+
+{
+  "model": "Antila 24.6",
+  "crew": 8,
+  "production_date": "2021-02-01"
+}
+
+###
+
+GET http://localhost:3000/yacht
+
+###
+
+GET http://localhost:3000/

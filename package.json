@@ -1,0 +1,37 @@
+{
+  "name": "yacht-rent-server",
+  "version": "0.0.1",
+  "description": "",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "NODE_ENV=dev node app.js"
+  },
+  "author": "LuqApo",
+  "license": "ISC",
+  "dependencies": {
+    "@koa/cors": "^3.1.0",
+    "@sendgrid/mail": "^7.6.0",
+    "ajv": "^8.11.0",
+    "ajv-formats": "^2.1.1",
+    "colors": "^1.4.0",
+    "firebase-admin": "^10.0.0",
+    "koa": "^2.13.4",
+    "koa-bodyparser": "^4.3.0",
+    "koa-combine-routers": "^4.0.2",
+    "koa-router": "^10.1.1",
+    "pg": "^8.7.1",
+    "redis": "^3.1.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-config-node": "^4.1.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-node": "^11.1.0",
+    "@babel/core": "^7.17.8",
+    "@babel/eslint-parser": "^7.16.5",
+    "@babel/preset-env": "^7.16.11"
+  }
+}
