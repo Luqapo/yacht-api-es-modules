@@ -1,8 +1,8 @@
 import Router from 'koa-router';
 import { validate } from '../utils/validate.js';
-import { silentImport } from '../utils/import.js';
+import { dynamicImport } from '../utils/import.js';
 
-const service = await silentImport('/service/index.js');
+const service = await dynamicImport('/service/index.js');
 
 const router = new Router({ prefix: '/reservation' });
 

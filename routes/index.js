@@ -2,14 +2,14 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 import path from 'path';
 import combineRouters from 'koa-combine-routers';
-import { silentImport } from '../utils/import.js';
+import { dynamicImport } from '../utils/import.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const basename = path.basename(__filename);
 const routers = [];
 
 async function addRouter(file) {
-  routers.push(await silentImport(file));
+  routers.push(await dynamicImport(file));
 }
 
 async function create() {

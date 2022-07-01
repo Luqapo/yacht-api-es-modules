@@ -3,6 +3,8 @@
     "env": {
       "node": true,
       "es6": true,
+      "es2020": true,
+      "es2021": true,
       "mocha": true
     },
     "parser": "@babel/eslint-parser",

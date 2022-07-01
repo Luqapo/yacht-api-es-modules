@@ -2,9 +2,9 @@ import Router from 'koa-router';
 import { readFile } from 'fs/promises';
 import { handleError } from '../utils/error.js';
 import { validate } from '../utils/validate.js';
-import { silentImport } from '../utils/import.js';
+import { dynamicImport } from '../utils/import.js';
 
-const service = await silentImport('/service/index.js');
+const service = await dynamicImport('/service/index.js');
 
 const env = process.env.NODE_ENV || 'test';
 const configJson = JSON.parse(

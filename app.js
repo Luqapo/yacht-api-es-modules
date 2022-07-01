@@ -1,13 +1,13 @@
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import cors from '@koa/cors';
-import { silentImport } from './utils/import.js';
+import { dynamicImport } from './utils/import.js';
 import scopes from './utils/scopes.js';
 import * as db from './db/index.js';
 import * as logger from './utils/logger.js';
 
-const router = await silentImport('/routes/index.js');
-const service = await silentImport('/service/index.js');
+const router = await dynamicImport('/routes/index.js');
+const service = await dynamicImport('/service/index.js');
 
 const PORT = process.env.PORT || 3000;
 let appPromise;
@@ -28,8 +28,7 @@ app.use(async (ctx, next) => {
   try {
     await next();
   } catch(err) {
-    // eslint-disable-next-line no-console
-    console.error('app middleware', err);
+    logger.error('app middleware', err);
     ctx.status = err.statusCode || err.code || 500;
     ctx.body = { error: err.message };
   }

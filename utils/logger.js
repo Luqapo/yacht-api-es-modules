@@ -6,7 +6,6 @@ export function debug(text) {
 }
 
 export function info(text) {
-  console.log('🚀 ~ file: logger.js ~ line 9 ~ info ~ text', text);
   return console.log(colors.yellow(`${new Date().toISOString()} - ${text}`));
 }
 

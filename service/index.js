@@ -1,14 +1,14 @@
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import path from 'path';
-import { silentImport } from '../utils/import.js';
+import { dynamicImport } from '../utils/import.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const basename = path.basename(__filename);
 const service = {};
 
 async function addService(file, currentDir) {
-  service[file.split('.')[0]] = await silentImport(`${currentDir}${file}`);
+  service[file.split('.')[0]] = await dynamicImport(`${currentDir}${file}`);
 }
 
 async function create() {
