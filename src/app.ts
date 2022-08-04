@@ -1,6 +1,7 @@
 import Koa, { Context } from 'koa';
 import bodyParser from 'koa-bodyparser';
 import cors from '@koa/cors';
+import { RequestContext } from '@mikro-orm/core';
 import { dynamicImport } from './utils/import.js';
 import scopes from './utils/scopes';
 import * as db from './db/index.js';
@@ -35,7 +36,7 @@ app.use(async (ctx: Context, next) => {
 });
 
 // app.use(service.auth.middleware(scopes));
-
+app.use((ctx, next) => RequestContext.createAsync(db.DI.orm.em, next));
 app.use(router());
 
 function init() {

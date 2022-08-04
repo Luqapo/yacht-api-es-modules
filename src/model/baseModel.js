@@ -1,4 +1,4 @@
-import * as db from '../db/index.js';
+import * as db from '../db/index.ts.old';
 
 function getLimit(limit) {
   if(limit) {

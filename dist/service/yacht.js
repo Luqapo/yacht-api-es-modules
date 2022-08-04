@@ -1,12 +1,13 @@
-// import Yacht from '../model/yacht.js';
+import { DI } from '../db/index.js';
 async function create(query) {
     console.log('🚀 ~ file: yacht.ts ~ line 5 ~ create ~ query', query);
-    // const yacht = await Yacht.create(query);
-    return 'yacht.rows';
+    const yacht = DI.yachtRepository.create(query);
+    await DI.yachtRepository.persist(yacht).flush();
+    return yacht;
 }
 async function get(query) {
-    // const yachts = await Yacht.get(query);
-    return 'yachts.rows';
+    const yachts = DI.yachtRepository.findAll(query);
+    return yachts;
 }
 async function filters() {
     // const result = await Yacht.getFilters();

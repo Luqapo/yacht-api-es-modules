@@ -1,17 +1,19 @@
 import { ParsedUrlQuery } from 'querystring'
-// import Yacht from '../model/yacht.js';
+import { DI } from '../db/index.js';
+import { Yacht } from '../entities/index.js';
 
-async function create(query: ParsedUrlQuery) {
+async function create(query: Yacht) {
   console.log('🚀 ~ file: yacht.ts ~ line 5 ~ create ~ query', query);
-  // const yacht = await Yacht.create(query);
+  const yacht = DI.yachtRepository.create(query);
+  await DI.yachtRepository.persist(yacht).flush();
 
-  return 'yacht.rows';
+  return yacht;
 }
 
 async function get(query: ParsedUrlQuery) {
-  // const yachts = await Yacht.get(query);
+  const yachts = DI.yachtRepository.findAll(query);
 
-  return 'yachts.rows';
+  return yachts;
 }
 
 async function filters() {

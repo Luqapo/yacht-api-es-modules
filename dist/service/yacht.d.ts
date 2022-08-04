@@ -1,7 +1,8 @@
 /// <reference types="node" />
 import { ParsedUrlQuery } from 'querystring';
-declare function create(query: ParsedUrlQuery): Promise<string>;
-declare function get(query: ParsedUrlQuery): Promise<string>;
+import { Yacht } from '../entities/index.js';
+declare function create(query: Yacht): Promise<Yacht>;
+declare function get(query: ParsedUrlQuery): Promise<import("@mikro-orm/core").Loaded<Yacht, never>[]>;
 declare function filters(): Promise<string>;
 declare const _default: {
     create: typeof create;

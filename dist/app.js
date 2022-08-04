@@ -1,6 +1,7 @@
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import cors from '@koa/cors';
+import { RequestContext } from '@mikro-orm/core';
 import { dynamicImport } from './utils/import.js';
 import * as db from './db/index.js';
 import * as logger from './utils/logger.js';
@@ -28,6 +29,7 @@ app.use(async (ctx, next) => {
     }
 });
 // app.use(service.auth.middleware(scopes));
+app.use((ctx, next) => RequestContext.createAsync(db.DI.orm.em, next));
 app.use(router());
 function init() {
     if (!appPromise) {
