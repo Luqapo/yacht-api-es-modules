@@ -1,0 +1,14 @@
+{
+  "secret": "test_secret",
+  "sendgrid": {
+    "api_key": "test"
+  },
+  "postgres": {
+    "host": "127.0.0.1",
+    "port": 5432,
+    "user": "yacht_rent",
+    "password": "yacht_rent",
+    "database": "yacht_rent",
+    "debug": true
+  }
+}
