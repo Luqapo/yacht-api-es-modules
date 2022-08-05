@@ -1,5 +1,5 @@
 {
-    "extends": "airbnb-base",
+    "extends": ["airbnb-base", "airbnb-typescript/base"],
     "env": {
       "node": true,
       "es6": true,
@@ -7,10 +7,9 @@
       "es2021": true,
       "mocha": true
     },
-    "parser": "@babel/eslint-parser",
+    "parser": "@typescript-eslint/parser",
     "parserOptions": {
-      "ecmaVersion": 2021,
-      "sourceType": "module"
+      "project": "./tsconfig.json"
     },
     "rules": {
       "keyword-spacing": ["error", {
@@ -44,6 +43,7 @@
       }],
       "camelcase": 0,
       "max-len": ["error", { "code": 125, "tabWidth": 4 }],
-      "import/extensions": [0]
+      "import/extensions": [0],
+      "import/prefer-default-export": 0
     }
   }

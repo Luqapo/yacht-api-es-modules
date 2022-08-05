@@ -1,4 +1,4 @@
-import { ParsedUrlQuery } from 'querystring'
+import { ParsedUrlQuery } from 'querystring';
 // import { Reservation } from '../model/reservation.js';
 
 async function create(query: ParsedUrlQuery) {

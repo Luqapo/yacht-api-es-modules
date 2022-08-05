@@ -1,5 +1,11 @@
+export type Scope = {
+  path: RegExp;
+  method: string;
+  scope: string;
+};
+
 // TODO: think about better solution
-export default [
+export const scopes: Scope[] = [
   {
     path: /^\/user\/login/,
     method: 'POST',

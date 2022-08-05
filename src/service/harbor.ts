@@ -1,4 +1,4 @@
-import { ParsedUrlQuery } from 'querystring'
+import { ParsedUrlQuery } from 'querystring';
 // import Harbor from '../model/harbor.js';
 
 async function get(query: ParsedUrlQuery) {

@@ -1,4 +1,4 @@
-const registerTemplate = (pass) => `<div>
+export const recoverTemplate = (pass: string) => `<div>
   <div>
     Hasło zosatło zresetowane.
   </div>
@@ -12,5 +12,3 @@ const registerTemplate = (pass) => `<div>
     Wiadomość wysłana automatycznie
   </div>
 </div>`;
-
-export default registerTemplate;

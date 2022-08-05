@@ -1,7 +1,9 @@
 {
   "secret": "test_secret",
+  "register_token_ttl": 3600,
   "sendgrid": {
-    "api_key": "test"
+    "api_key": "test",
+    "sender": "l.test@warbon.it"
   },
   "postgres": {
     "host": "127.0.0.1",
@@ -10,5 +12,8 @@
     "password": "yacht_rent",
     "database": "yacht_rent",
     "debug": true
-  }
+  },
+  "redis": {},
+  "api_address": "http://localhost:3001",
+  "web_address": "http://localhost:3000"
 }

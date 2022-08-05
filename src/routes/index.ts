@@ -5,6 +5,7 @@ import Router from 'koa-router';
 import combineRouters from 'koa-combine-routers';
 import { dynamicImport } from '../utils/import.js';
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 const __filename = fileURLToPath(import.meta.url);
 const basename = path.basename(__filename);
 const routers: Array<Router> = [];

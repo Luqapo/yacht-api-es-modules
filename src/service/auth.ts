@@ -1,23 +1,17 @@
 import crypto from 'crypto';
-import { readFile } from 'fs/promises';
+import { Context } from 'koa';
 import * as logger from '../utils/logger.js';
 import * as redis from './redis.js';
-import UserRoleEnum from '../utils/enums.js';
+import { UserRoleEnum } from '../utils/enums.js';
+import { Scope } from '../utils/scopes.js';
 
-const env = process.env.NODE_ENV || 'test';
-const configJson = JSON.parse(
-  await readFile(
-    new URL('../config/config.json', import.meta.url),
-  ),
-);
+import config from '../config/config.json' assert { type: 'json' };
 
-const config = configJson[env];
-
-function hash(string, algorithm = 'sha256') {
+function hash(string: string, algorithm = 'sha256') {
   return crypto.createHmac(algorithm, config.secret).update(string).digest('hex');
 }
 
-function verify(string, salt, algorithm = 'sha256') {
+function verify(string: string, salt: string, algorithm = 'sha256') {
   return crypto.createHmac(algorithm, config.secret).update(string).digest('hex') === salt;
 }
 
@@ -25,13 +19,14 @@ function randomString(length = 12) {
   return crypto.randomBytes(length).toString('hex').substr(0, length);
 }
 
-async function auth(ctx, roleId) {
+async function auth(ctx: Context, roleId: number | null) {
   const token = ctx.get('Authorization').split(' ')[1];
   logger.info(`~ auth ~ token: ${token}`);
   if(!token) {
     ctx.throw(401, 'Unauthorized');
   }
   const storedData = await redis.get(token);
+  console.log('🚀 ~ file: auth.ts ~ line 29 ~ auth ~ storedData', storedData);
   if(!storedData) {
     ctx.throw(403, 'Forbidden');
   }
@@ -44,16 +39,16 @@ async function auth(ctx, roleId) {
 }
 
 export default {
-  middleware(scopes) {
-    return async (ctx, next) => {
+  middleware(scopes: Scope[]) {
+    return async (ctx: Context, next: () => Promise<any>) => {
       let found = false;
-      for(let i=0, l=scopes.length; i<l && !found; i++) {
+      for(let i = 0, l = scopes.length; i < l && !found; i++) {
         if(scopes[i].method === ctx.method && scopes[i].path.test(ctx.path)) {
           found = true;
           switch(scopes[i].scope) {
             case 'user': {
               // eslint-disable-next-line no-await-in-loop
-              await auth(ctx);
+              await auth(ctx, null);
               break;
             }
             case 'publisher':

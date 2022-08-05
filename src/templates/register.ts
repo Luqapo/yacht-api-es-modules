@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-const registerTemplate = (token, api_address, email) => `<div>
+export const registerTemplate = (token: string, api_address: string, email: string) => `<div>
   <div>
     Dziękujemy za zainteresowanie naszą aplikacją. Mamy nadzieję, że spełni Państwa oczekiwania.
     W celu potwierdzenia adresu e-mail i aktywacji konta w aplikacji, kliknij w poniższy link lub wklej go do przeglądarki.
@@ -11,5 +11,3 @@ const registerTemplate = (token, api_address, email) => `<div>
     Wiadomość wysłana automatycznie
   </div>
 </div>`;
-
-export default registerTemplate;

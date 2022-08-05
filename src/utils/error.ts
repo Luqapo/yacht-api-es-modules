@@ -1,8 +1,11 @@
 import { Context } from 'koa';
+import * as logger from './logger.js';
 
 export class ApiError extends Error {
-  code: number
-  statusCode: number
+  code: number;
+
+  statusCode: number;
+
   constructor(message: string, code: number) {
     super();
     this.message = message;
@@ -12,6 +15,8 @@ export class ApiError extends Error {
 }
 
 export const handleError = (ctx: Context, err: ApiError) => {
+  console.log('🚀 ~ file: error.ts ~ line 15 ~ handleError ~ err', err);
+  logger.error(`app middleware:  ${err}`);
   ctx.status = err.statusCode || err.code || 500;
   ctx.body = { error: err.message };
 };

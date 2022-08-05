@@ -1,6 +1,6 @@
 import { Options } from '@mikro-orm/core';
-import { Yacht, BaseEntity } from './entities/index.js';
 import { SqlHighlighter } from '@mikro-orm/sql-highlighter';
+import { Yacht, BaseEntity, User } from './entities/index.js';
 
 const config: Options = {
   type: 'postgresql',
@@ -8,7 +8,7 @@ const config: Options = {
   user: 'yacht_rent',
   password: 'yacht_rent',
   // as we are using class references here, we don't need to specify `entitiesTs` option
-  entities: [Yacht, BaseEntity],
+  entities: [BaseEntity, Yacht, User],
   highlighter: new SqlHighlighter(),
   debug: true,
 };

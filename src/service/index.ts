@@ -5,10 +5,11 @@ import { dynamicImport } from '../utils/import.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const basename = path.basename(__filename);
-type serviceObject = {
+type ServiceObject = {
   [key: string]: any
-}
-const service: serviceObject = {};
+};
+
+const service: ServiceObject = {};
 
 async function addService(file: string, currentDir: string) {
   service[file.split('.')[0]] = await dynamicImport(`${currentDir}${file}`);

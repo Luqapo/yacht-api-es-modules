@@ -1,4 +1,4 @@
-import { ParsedUrlQuery } from 'querystring'
+import { ParsedUrlQuery } from 'querystring';
 import { DI } from '../db/index.js';
 import { Yacht } from '../entities/index.js';
 
