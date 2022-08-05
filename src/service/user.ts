@@ -10,8 +10,6 @@ import { DI } from '../db/index.js';
 
 import config from '../config/config.json' assert { type: 'json' };
 
-console.log('🚀 ~ file: user.ts ~ line 3 ~ redis', redis);
-
 enum UserTypeEnum {
   INTERNAL = 1,
   GOOGLE,
@@ -26,17 +24,21 @@ interface CachedUser {
 
 async function register(user: User) {
   const userInDatabase = await DI.userRepository.findOne({ email: user.email });
-  if(userInDatabase) {
+  if (userInDatabase) {
     throw new ApiError('Email already exists', 400);
   }
   const cached = await redis.get(`register-${user.email}`);
+  console.log('🚀 ~ file: user.ts ~ line 33 ~ register ~ cached', cached);
   let ttl = config.register_token_ttl;
-  if(!cached) {
+  console.log('🚀 ~ file: user.ts ~ line 35 ~ register ~ ttl', ttl);
+  if (!cached) {
     const token = auth.randomString();
     logger.info(`~ register ~ token: ${token}`);
     const cachedUser: CachedUser = { ...user };
     cachedUser.password = auth.hash(user.password);
     cachedUser.token = token;
+    console.log('🚀 ~ file: user.ts ~ line 38 ~ register ~ cachedUser', cachedUser);
+
     await redis.set(`register-${user.email}`, cachedUser, ttl);
     const html = registerTemplate(token, config.api_address, user.email);
     await sendgrid.send({ to: user.email, subject: 'Dokończ rejstrację', html });
@@ -49,15 +51,19 @@ async function register(user: User) {
 }
 
 async function confirm(token: string, email: string) {
+  console.log('🚀 ~ file: user.ts ~ line 52 ~ confirm ~ email', email);
+  console.log('🚀 ~ file: user.ts ~ line 52 ~ confirm ~ token', token);
   const storedData = await redis.get(`register-${email}`);
-  if(!storedData) {
+  console.log('🚀 ~ file: user.ts ~ line 55 ~ confirm ~ storedData', storedData);
+  if (!storedData) {
     throw new ApiError('Invalid token', 400);
   }
-  if(token !== storedData.token) {
+  if (token !== storedData.token) {
     throw new ApiError('Wrong token', 400);
   }
   delete storedData.token;
-  await DI.userRepository.create({ ...storedData, type: UserTypeEnum.INTERNAL });
+  const user = await DI.userRepository.create({ ...storedData, type: UserTypeEnum.INTERNAL });
+  await DI.userRepository.persist(user).flush();
   await redis.deleteKey(`register-${email}`);
 }
 
@@ -77,10 +83,10 @@ async function confirm(token: string, email: string) {
 
 async function login({ email, password }: { email: string, password: string }) {
   const userInDatabase = await DI.userRepository.findOne({ email });
-  if(!userInDatabase) {
+  if (!userInDatabase) {
     throw new ApiError('Invalid email', 404);
   }
-  if(!auth.verify(password, userInDatabase.password)) {
+  if (!auth.verify(password, userInDatabase.password)) {
     throw new ApiError('Wrong password', 401);
   }
   const token = auth.randomString(32);

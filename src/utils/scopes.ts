@@ -31,7 +31,7 @@ export const scopes: Scope[] = [
     scope: 'user',
   }, {
     // confirm user email
-    path: /^\/user\/confirm\/?$/,
+    path: /^\/user\/confirm/,
     method: 'GET',
     scope: 'public',
   }, {
@@ -40,28 +40,23 @@ export const scopes: Scope[] = [
     method: 'POST',
     scope: 'public',
   }, {
-    // getting all areas
-    path: /^\/region\/?$/,
+    // getting all yacht
+    path: /^\/yacht/,
+    method: 'POST',
+    scope: 'public',
+  }, {
+    // getting all yacht
+    path: /^\/yacht/,
+    method: 'GET',
+    scope: 'public',
+  }, {
+    // getting one yacht
+    path: /^\/yacht\/[a-zA-Z0-9]+$/,
     method: 'GET',
     scope: 'public',
   }, {
     // getting all routes from spec crag
-    path: /^\/region\/filters\/?$/,
-    method: 'GET',
-    scope: 'public',
-  }, {
-    // getting all area
-    path: /^\/area\/?$/,
-    method: 'GET',
-    scope: 'public',
-  }, {
-    // getting one area
-    path: /^\/area\/[a-zA-Z0-9]+$/,
-    method: 'GET',
-    scope: 'public',
-  }, {
-    // getting all routes from spec crag
-    path: /^\/area\/filters\/?$/,
+    path: /^\/yacht\/filters\/?$/,
     method: 'GET',
     scope: 'public',
   }, {
@@ -80,12 +75,12 @@ export const scopes: Scope[] = [
     method: 'GET',
     scope: 'public',
   }, {
-    // getting all crags from spec area
+    // getting all crags from spec yacht
     path: /^\/crag\/?$/,
     method: 'GET',
     scope: 'public',
   }, {
-    // getting all crags from spec area
+    // getting all crags from spec yacht
     path: /^\/crag\/[a-zA-Z0-9]+$/,
     method: 'GET',
     scope: 'public',
@@ -94,91 +89,5 @@ export const scopes: Scope[] = [
     path: /^\/crag\/filters\/?$/,
     method: 'GET',
     scope: 'public',
-  }, {
-    // getting all routes from spec crag
-    path: /^\/route\/?$/,
-    method: 'GET',
-    scope: 'public',
-  }, {
-    // getting all routes from spec crag
-    path: /^\/route\/filters\/?$/,
-    method: 'GET',
-    scope: 'public',
-  }, {
-    // getting all routes from spec crag
-    path: /^\/route\/one\/[0-9]+$/,
-    method: 'GET',
-    scope: 'public',
-  },
-  {
-    // getting all routes from spec crag
-    path: /^\/search\/?$/,
-    method: 'GET',
-    scope: 'public',
-  }, {
-    // getting all routes from spec crag
-    path: /^\/search\/filters\/?$/,
-    method: 'GET',
-    scope: 'public',
-  }, {
-    // getting all routes from spec crag
-    path: /^\/gym\/?$/,
-    method: 'GET',
-    scope: 'public',
-  }, {
-    // getting all routes from spec crag
-    path: /^\/gym\/?$/,
-    method: 'POST',
-    scope: 'user',
-  }, {
-    // getting all routes from spec crag
-    path: /^\/gym\/filters\/?$/,
-    method: 'GET',
-    scope: 'public',
-  }, {
-    // getting all routes from spec crag
-    path: /^\/gym\/voivodeship\/?$/,
-    method: 'GET',
-    scope: 'public',
-  }, {
-    path: /^\/gym\/town\/?$/,
-    method: 'GET',
-    scope: 'public',
-  }, {
-    path: /^\/gym\/activity\/[0-9]+$/,
-    method: 'GET',
-    scope: 'public',
-  }, {
-    path: /^\/gym\/activity\/filters\/?$/,
-    method: 'GET',
-    scope: 'public',
-  }, {
-    path: /^\/gym\/comment\/activity$/,
-    method: 'POST',
-    scope: 'user',
-  }, {
-    path: /^\/gym\/activity\/[0-9]+$/,
-    method: 'POST',
-    scope: 'user',
-  }, {
-    // getting all routes from spec crag
-    path: /^\/gym\/activity\/?$/,
-    method: 'POST',
-    scope: 'user',
-  }, {
-    // getting all routes from spec crag
-    path: /^\/message\/filters\/?$/,
-    method: 'GET',
-    scope: 'public',
-  }, {
-    // getting all routes from spec crag
-    path: /^\/message\/?$/,
-    method: 'GET',
-    scope: 'user',
-  }, {
-    // getting all routes from spec crag
-    path: /^\/message\/?$/,
-    method: 'POST',
-    scope: 'user',
   },
 ];

@@ -5,25 +5,26 @@ import config from '../config/config.json' assert { type: 'json' };
 
 let client: RedisClientType;
 
-export function init() {
-  client = createClient();
+export async function init() {
+  client = createClient(config.redis);
   client.on('error', (err: any) => {
     logger.error(`RedisClient: ${err.message}`);
   });
+  await client.connect();
 }
 
 export async function get(key: string) {
-  const data = await client.get(key) || '';
+  const data = await client.get(key);
 
-  return JSON.parse(data);
+  return JSON.parse(data!);
 }
 
 export function setex(key: string, value: any, lifetime: number) {
-  return client.setEx(key, lifetime, JSON.stringify(value));
+  return client.set(key, JSON.stringify(value), { EX: lifetime });
 }
 
 export function set(key: string, value: any, lifetime: number | null = null) {
-  if(lifetime) {
+  if (lifetime) {
     return setex(key, value, lifetime);
   }
   return client.set(key, JSON.stringify(value));
@@ -36,12 +37,3 @@ export function deleteKey(key: string) {
 export function ttl(key: string) {
   return client.ttl(key);
 }
-
-// export default {
-//   init,
-//   get,
-//   set,
-//   setex,
-//   deleteKey,
-//   ttl,
-// };

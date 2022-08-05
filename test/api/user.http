@@ -15,7 +15,7 @@ content-type: application/json
 ###
 // confirm user
 
-GET {{serverAdress}}/user/confirm?token=f66e06c6a9ea&email=test@test.com
+GET {{serverAdress}}/user/confirm/?token=d00b06bf0d4c&email=test@test.com
 content-type: application/json
 
 

@@ -23,12 +23,12 @@ app.use(bodyParser({
 
 app.use(async (ctx: Context, next) => {
   logger.info(`Req path: ${ctx.URL.pathname}`);
-  if(Object.keys(ctx.query).length) {
+  if (Object.keys(ctx.query).length) {
     logger.info(JSON.stringify(ctx.query));
   }
   try {
     await next();
-  } catch(err: any) {
+  } catch (err: any) {
     logger.error(`app middleware:  ${err}`);
     ctx.status = err.statusCode || err.code || 500;
     ctx.body = { error: err.message };
@@ -40,11 +40,11 @@ app.use((ctx, next) => RequestContext.createAsync(db.DI.orm.em, next));
 app.use(router());
 
 function init() {
-  if(!appPromise) {
+  if (!appPromise) {
     // eslint-disable-next-line no-async-promise-executor
     appPromise = new Promise(async (resolve) => {
       await db.init();
-      service.redis.init();
+      await service.redis.init();
       app.listen(PORT, () => {
         logger.success(`Server running in ${process.env.NODE_ENV} and listen on ${PORT}`);
         resolve(app);

@@ -31,7 +31,7 @@ router.get('/', async (ctx, next) => {
   try {
     const yachts = await service.yacht.get(ctx.query);
     ctx.body = yachts;
-  } catch(err: any) {
+  } catch (err: any) {
     throw new Error(err.message);
   }
   next();
@@ -42,7 +42,7 @@ router.post('/', (ctx, next) => validate<Yacht>(schemaYacht, ctx.request.body, n
     const yacht = await service.yacht.create(ctx.request.body);
     ctx.body = yacht;
     ctx.status = 201;
-  } catch(err: any) {
+  } catch (err: any) {
     throw new Error(err.message);
   }
   next();
@@ -52,7 +52,7 @@ router.get('/filters', async (ctx, next) => {
   try {
     const filters = await service.region.filters();
     ctx.body = filters;
-  } catch(err: any) {
+  } catch (err: any) {
     throw new Error(err.message);
   }
   next();

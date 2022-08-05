@@ -12,15 +12,15 @@
       "project": "./tsconfig.json"
     },
     "rules": {
-      "keyword-spacing": ["error", {
-        "overrides": {
-          "if": { "after": false },
-          "while": { "after": false },
-          "for": { "after": false },
-          "switch": { "after": false },
-          "catch": { "after": false }
-        }
-      }],
+      // "keyword-spacing": ["error", {
+      //   "overrides": {
+      //     "if": { "after": false },
+      //     "while": { "after": false },
+      //     "for": { "after": false },
+      //     "switch": { "after": false },
+      //     "catch": { "after": false }
+      //   }
+      // }],
       "comma-dangle": ["error", "always-multiline"],
       "no-unused-vars": "warn",
       "no-param-reassign": ["error", { "props": false }],
