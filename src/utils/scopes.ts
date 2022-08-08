@@ -60,24 +60,34 @@ export const scopes: Scope[] = [
     method: 'GET',
     scope: 'public',
   }, {
-    // getting sector
-    path: /^\/sector\/?$/,
+    // getting harbor
+    path: /^\/harbor\/?$/,
     method: 'GET',
     scope: 'public',
   }, {
-    // getting sector
-    path: /^\/sector\/[a-zA-Z0-9]+$/,
+    // getting harbor
+    path: /^\/harbor\/?$/,
+    method: 'POST',
+    scope: 'public',
+  }, {
+    // getting harbor
+    path: /^\/harbor\/[a-zA-Z0-9]+$/,
     method: 'GET',
     scope: 'public',
   }, {
     // getting all routes from spec crag
-    path: /^\/sector\/filters\/?$/,
+    path: /^\/harbor\/filters\/?$/,
     method: 'GET',
     scope: 'public',
   }, {
     // getting all crags from spec yacht
-    path: /^\/crag\/?$/,
+    path: /^\/reservation\/?$/,
     method: 'GET',
+    scope: 'public',
+  }, {
+    // getting all crags from spec yacht
+    path: /^\/reservation\/?$/,
+    method: 'POST',
     scope: 'public',
   }, {
     // getting all crags from spec yacht

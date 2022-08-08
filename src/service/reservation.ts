@@ -1,18 +1,20 @@
 import { ParsedUrlQuery } from 'querystring';
-// import { Reservation } from '../model/reservation.js';
+import { DI } from '../db/index.js';
+import { Reservation } from '../entities/index.js';
 
-async function create(query: ParsedUrlQuery) {
+async function create(query: Reservation) {
   console.log('🚀 ~ file: reservation.ts ~ line 4 ~ create ~ query', query);
-  // const reservation = await Reservation.create(query);
+  const reservation = DI.reservationRepository.create(query);
+  await DI.reservationRepository.persist(reservation).flush();
 
-  return 'reservation.rows';
+  return reservation;
 }
 
 async function get(query: ParsedUrlQuery) {
   console.log('🚀 ~ file: reservation.ts ~ line 11 ~ get ~ query', query);
-  // const reservations = await Reservation.get(query);
+  const reservations = await DI.reservationRepository.findAll(query);
 
-  return 'reservations.rows';
+  return reservations;
 }
 
 async function filters() {

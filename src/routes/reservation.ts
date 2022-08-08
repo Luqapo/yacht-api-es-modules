@@ -39,8 +39,8 @@ const schemaReservation: JSONSchemaType<Reservation> = {
 router.get('/', async (ctx, next) => {
   try {
     const reservations = await service.reservation.get(ctx.query);
-    ctx.body =reservations;
-  } catch(err: any) {
+    ctx.body = reservations;
+  } catch (err: any) {
     throw new Error(err.message);
   }
   next();
@@ -50,7 +50,7 @@ router.post('/', (ctx, next) => validate<Reservation>(schemaReservation, ctx.req
   try {
     const reservation = await service.reservation.create(ctx.request.body);
     ctx.body = reservation;
-  } catch(err: any) {
+  } catch (err: any) {
     throw new Error(err.message);
   }
   next();
@@ -60,7 +60,7 @@ router.get('/filters', async (ctx, next) => {
   try {
     const filters = await service.region.filters();
     ctx.body = filters;
-  } catch(err: any) {
+  } catch (err: any) {
     throw new Error(err.message);
   }
   next();

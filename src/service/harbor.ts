@@ -1,25 +1,27 @@
 import { ParsedUrlQuery } from 'querystring';
-// import Harbor from '../model/harbor.js';
+import { DI } from '../db/index.js';
+import { Harbor } from '../entities/index.js';
 
 async function get(query: ParsedUrlQuery) {
   console.log('🚀 ~ file: harbor.ts ~ line 4 ~ get ~ query', query);
-  // const harbors = await Harbor.get(query);
+  const harbors = DI.harborRepository.findAll(query);
 
-  return 'harbors.rows';
+  return harbors;
 }
 
-async function create(query: ParsedUrlQuery) {
+async function create(query: Harbor) {
   console.log('🚀 ~ file: harbor.ts ~ line 11 ~ create ~ query', query);
-  // const harbors = await Harbor.create(query);
+  const harbor = DI.harborRepository.create(query);
+  await DI.harborRepository.persist(harbor).flush();
 
-  return 'harbors.rows';
+  return harbor;
 }
 
 async function getOne(harborId: ParsedUrlQuery) {
   console.log('🚀 ~ file: harbor.ts ~ line 18 ~ getOne ~ harborId', harborId);
-  // const harbors = await Harbor.getOne(harborId);
+  const harbor = DI.harborRepository.findOne({ id: harborId });
 
-  return 'harbors.rows[0]';
+  return harbor;
 }
 
 async function filters() {
