@@ -83,12 +83,12 @@ export const scopes: Scope[] = [
     // getting all crags from spec yacht
     path: /^\/reservation\/?$/,
     method: 'GET',
-    scope: 'public',
+    scope: 'user',
   }, {
     // getting all crags from spec yacht
     path: /^\/reservation\/?$/,
     method: 'POST',
-    scope: 'public',
+    scope: 'user',
   }, {
     // getting all crags from spec yacht
     path: /^\/crag\/[a-zA-Z0-9]+$/,

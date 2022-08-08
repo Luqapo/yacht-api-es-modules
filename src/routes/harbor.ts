@@ -1,14 +1,11 @@
 import Router from 'koa-router';
-import { dynamicImport } from '../utils/import.js';
-
-const service = await dynamicImport('/dist/service/index.js');
+import * as harborService from '../service/harbor.js';
 
 const router = new Router({ prefix: '/harbor' });
 
 router.get('/', async (ctx, next) => {
-  console.log('🚀 ~ file: harbor.ts ~ line 10 ~ router.get ~ ctx', ctx);
   try {
-    const harbors = await service.harbor.get(ctx.query);
+    const harbors = await harborService.get(ctx.query);
     ctx.body = harbors;
   } catch (err: any) {
     throw new Error(err.message);
@@ -17,9 +14,8 @@ router.get('/', async (ctx, next) => {
 });
 
 router.post('/', async (ctx, next) => {
-  console.log('🚀 ~ file: harbor.ts ~ line 21 ~ router.post ~ ctx', ctx);
   try {
-    const harbor = await service.harbor.create(ctx.request.body);
+    const harbor = await harborService.create(ctx.request.body);
     ctx.body = harbor;
   } catch (err: any) {
     throw new Error(err.message);
@@ -28,9 +24,8 @@ router.post('/', async (ctx, next) => {
 });
 
 router.get('/filters', async (ctx, next) => {
-  console.log('🚀 ~ file: harbor.ts ~ line 32 ~ router.get ~ ctx', ctx);
   try {
-    const filters = await service.harbor.filters();
+    const filters = await harborService.filters();
     ctx.body = filters;
   } catch (err: any) {
     throw new Error(err.message);
@@ -39,10 +34,9 @@ router.get('/filters', async (ctx, next) => {
 });
 
 router.get('/:harborId', async (ctx, next) => {
-  console.log('🚀 ~ file: harbor.ts ~ line 43 ~ router.get ~ ctx', ctx);
   try {
     const { harborId } = ctx.params;
-    const harbor = await service.harbor.getOne(harborId);
+    const harbor = await harborService.getOne(+harborId);
     ctx.body = harbor;
   } catch (err: any) {
     throw new Error(err.message);

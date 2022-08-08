@@ -20,13 +20,12 @@ function randomString(length = 12) {
 }
 
 async function auth(ctx: Context, roleId: number | null) {
-  const token = ctx.get('Authorization').split(' ')[1];
+  const token = ctx.get('Authorization');
   logger.info(`~ auth ~ token: ${token}`);
   if (!token) {
     ctx.throw(401, 'Unauthorized');
   }
   const storedData = await redis.get(token);
-  console.log('🚀 ~ file: auth.ts ~ line 29 ~ auth ~ storedData', storedData);
   if (!storedData) {
     ctx.throw(403, 'Forbidden');
   }

@@ -1,13 +1,12 @@
 import Router from 'koa-router';
 import { JSONSchemaType } from 'ajv';
 import { validate } from '../utils/validate.js';
-import { dynamicImport } from '../utils/import.js';
-
-const service = await dynamicImport('/dist/service/index.js');
+import * as reservationService from '../service/reservation.js';
+import { handleError } from '../utils/error.js';
 
 const router = new Router({ prefix: '/reservation' });
 
-interface Reservation {
+export interface Reservation {
   yacht_id: number
   user_id: number
   date_from: string
@@ -38,7 +37,7 @@ const schemaReservation: JSONSchemaType<Reservation> = {
 
 router.get('/', async (ctx, next) => {
   try {
-    const reservations = await service.reservation.get(ctx.query);
+    const reservations = await reservationService.get(ctx.query, ctx.state.user);
     ctx.body = reservations;
   } catch (err: any) {
     throw new Error(err.message);
@@ -48,20 +47,20 @@ router.get('/', async (ctx, next) => {
 
 router.post('/', (ctx, next) => validate<Reservation>(schemaReservation, ctx.request.body, next), async (ctx, next) => {
   try {
-    const reservation = await service.reservation.create(ctx.request.body);
+    const reservation = await reservationService.create(ctx.request.body, ctx.state.user);
     ctx.body = reservation;
   } catch (err: any) {
-    throw new Error(err.message);
+    handleError(ctx, err);
   }
   next();
 });
 
 router.get('/filters', async (ctx, next) => {
   try {
-    const filters = await service.region.filters();
+    const filters = await reservationService.filters();
     ctx.body = filters;
   } catch (err: any) {
-    throw new Error(err.message);
+    handleError(ctx, err);
   }
   next();
 });
